@@ -4,8 +4,11 @@ const http = require('http')
 const routes = require('./routes/index.route')
 const apiRoutes = require('./routes/api/index.route')
 
-// Dotenv Config
-require('dotenv').config()
+
+// Development Config
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config()
+}
 
 // Application Configuration
 const host = process.env.HOST || 'localhost'
