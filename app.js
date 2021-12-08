@@ -4,14 +4,16 @@ const http = require('http')
 const routes = require('./routes/index.route')
 const apiRoutes = require('./routes/api/index.route')
 
-
-// env Config
-require('dotenv').config()
-
-
 // Application Configuration
+const env = process.env.NODE_ENV || 'development'
 const host = process.env.HOST || 'localhost'
 const port = process.env.PORT || 5000
+
+// env Config
+if (env === 'development') {
+  require('dotenv').config()
+}
+
 
 // App Instance
 const app = express()
