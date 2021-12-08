@@ -5,10 +5,9 @@ const routes = require('./routes/index.route')
 const apiRoutes = require('./routes/api/index.route')
 
 
-// Development Config
-if (process.env.NODE_ENV === 'development') {
-  require('dotenv').config()
-}
+// env Config
+require('dotenv').config()
+
 
 // Application Configuration
 const host = process.env.HOST || 'localhost'
