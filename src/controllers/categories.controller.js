@@ -1,10 +1,17 @@
 const { body, validationResult } = require('express-validator')
 
+const { Category } = require('../models')
+
 /**
  * Read All Data
  */
-const readAll = function (req, res) {
-    return res.json({ data: 'Find All', id: req.params.id })
+const readAll = async function (req, res) {
+    try {
+        const data = await Category.findAll()
+        return res.json({ data })
+    } catch (error) {
+        return res.status(500).json({ message: 'Something went wrong!', error })
+    }
 }
 
 /**
