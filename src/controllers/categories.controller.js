@@ -29,6 +29,11 @@ const create = function (req, res) {
  * Update Old Data
  */
 const update = function (req, res) {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() })
+    }
+
     return res.json({ data: 'Updated Successfully' })
 }
 
@@ -43,9 +48,12 @@ const destroy = function (req, res) {
  * Request Validation
  */
 const validate = function (method) {
-    console.log(method)
     switch (method) {
         case 'create':
+            return [body('name').notEmpty()]
+            break
+
+        case 'update':
             return [body('name').notEmpty()]
             break
 

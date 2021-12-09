@@ -10,7 +10,7 @@ router.get('/', categoriesController.readAll)
 router.post('/', categoriesController.validate('create'), categoriesController.create)
 
 router.get('/:id', categoriesController.readOne)
-router.put('/:id', categoriesController.update)
+router.put('/:id', categoriesController.validate('update'), categoriesController.update)
 router.patch('/:id', categoriesController.update)
 router.delete('/:id', categoriesController.destroy)
 
