@@ -6,14 +6,13 @@ const router = express.Router({ mergeParams: true })
 /**
  * Alies to /categories
  */
-router.route('/')
-   .get(categoriesController.readAll)
-   .post(categoriesController.create)
+router.get('/', categoriesController.readAll)
+router.post('/', categoriesController.validate('create'), categoriesController.create)
 
-router.route('/:id')
-   .get(categoriesController.readOne)
-   .put(categoriesController.update)
-   .delete(categoriesController.destroy)
+router.get('/:id', categoriesController.readOne)
+router.put('/:id', categoriesController.update)
+router.patch('/:id', categoriesController.update)
+router.delete('/:id', categoriesController.destroy)
 
 
 // Export to outside

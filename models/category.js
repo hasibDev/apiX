@@ -15,13 +15,14 @@ module.exports = (sequelize, DataTypes) => {
    };
    Category.init({
       name: {
+         allowNull: false,
          type: DataTypes.STRING,
-         allowNull: false
       },
       description: DataTypes.TEXT
    }, {
       sequelize,
       modelName: 'Category',
+      tableName: 'categories'
    })
    return Category
 }
