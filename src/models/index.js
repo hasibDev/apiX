@@ -4,7 +4,6 @@ const fs = require('fs')
 const path = require('path')
 const Sequelize = require('sequelize')
 
-// Import Enviroment Variables
 require('dotenv').config()
 
 console.log('Current Env: ', process.env.NODE_ENV)
