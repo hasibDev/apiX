@@ -3,11 +3,8 @@ const cors = require('cors')
 const routes = require('./routes/index.route')
 const apiRoutes = require('./routes/api/index.route')
 
-// Enviroment Configuration
-const env = process.env.NODE_ENV || 'development'
-if (env === 'development') {
-   require('dotenv').config()
-}
+// Import Enviroment Variables
+require('dotenv').config()
 
 // App Instance
 const app = express()
