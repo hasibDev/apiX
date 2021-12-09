@@ -6,7 +6,7 @@ const apiRoutes = require('./routes/api/index.route')
 // Enviroment Configuration
 const env = process.env.NODE_ENV || 'development'
 if (env === 'development') {
-  require('dotenv').config()
+   require('dotenv').config()
 }
 
 // App Instance
