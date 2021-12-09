@@ -1,13 +1,13 @@
 {
   "name": "soup-api",
   "version": "1.0.0",
-  "description": "Soup Template Demo API",
-  "author": "Suelo",
-  "main": "app.js",
+  "description": "Express Project Stater",
+  "author": "Hasibur",
+  "main": "index.js",
   "private": true,
   "scripts": {
-    "dev": "nodemon --inspect src/app.js",
-    "start": "node src/app.js"
+    "dev": "nodemon --inspect src/index.js",
+    "start": "node src/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
