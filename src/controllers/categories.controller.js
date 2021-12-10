@@ -17,20 +17,37 @@ const readAll = async function (req, res) {
 /**
  * Read One Data
  */
-const readOne = function (req, res) {
-    return res.json({ data: 'Find One', id: req.params.id })
+const readOne = async function (req, res) {
+    const { id } = req.params
+
+    try {
+        const data = await Category.findByPk(id)
+
+        if (!data) return res.status(404).json({ message: `No data found for the id: ${id}` })
+
+        return res.json({ data })
+    } catch (error) {
+        return res.status(500).json({ error })
+    }
 }
 
 /**
  * Create New Data
  */
-const create = function (req, res) {
+const create = async function (req, res) {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() })
     }
 
-    return res.json({ data: 'Data Created' })
+    const { name, description } = req.body
+
+    try {
+        const data = await Category.create({ name, description })
+        return res.json({ data })
+    } catch (error) {
+        return res.status(500).json({ error })
+    }
 }
 /**
  * Update Old Data
@@ -41,14 +58,14 @@ const update = function (req, res) {
         return res.status(422).json({ errors: errors.array() })
     }
 
-    return res.json({ data: 'Updated Successfully' })
+    return res.json({ message: 'Updated Successfully' })
 }
 
 /**
  * Delete Data
  */
 const destroy = function (req, res) {
-    return res.json({ data: 'Delete Successfully' })
+    return res.json({ message: 'Delete Successfully' })
 }
 
 /**
