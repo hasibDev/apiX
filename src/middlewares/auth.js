@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 
 module.exports = function (...args) {
+    const authtype = [...args]
     return function (req, res, next) {
         const authHeader = req.headers['authorization']
         if (!authHeader) return res.status(401).json({ message: 'You are not authenticated!' })
@@ -9,7 +10,8 @@ module.exports = function (...args) {
 
         jwt.verify(token, jwtSecret, (err, value) => {
             if (err) return res.status(401).json({ message: 'Invalid token!' })
-            if (![...args].includes(value.user.authtype)) return res.status(403).json({ message: 'You are not allowed!' })
+            if (authtype.length && !authtype.includes(value.user.authtype))
+                return res.status(403).json({ message: 'You are not allowed!' })
         })
 
         next()
