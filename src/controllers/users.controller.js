@@ -1,6 +1,26 @@
+const jwt = require('jsonwebtoken')
+const bcrypt = require("bcrypt")
 const { body, validationResult } = require('express-validator')
 
 const { User } = require('../models')
+
+/**
+ * User Login
+ */
+const login = async function (req, res) {
+   const user = await User.findOne({ where: { email: req.body.email } })
+
+   const checkPassword = await bcrypt.compare(req.body.password, user.password)
+
+   if (checkPassword) {
+      jwt.sign({ user }, 'secretkey', (err, token) => {
+         return res.json({ token, user })
+      })
+   } else {
+      return res.status(401).json({ message: 'Invalid Email or Password' })
+   }
+
+}
 
 /**
  * Read All Data
@@ -43,9 +63,10 @@ const create = async function (req, res) {
    }
 
    const { firstName, lastName, email, password } = req.body
+   const hashPassword = await bcrypt.hash(password, 10)
 
    try {
-      const data = await User.create({ firstName, lastName, email, password })
+      const data = await User.create({ firstName, lastName, email, password: hashPassword })
       return res.json({ data })
    } catch (error) {
       return res.status(500).json({ error })
@@ -133,5 +154,5 @@ const validate = function (method) {
 
 // Export to outside
 module.exports = {
-   readAll, readOne, create, update, destroy, validate
+   login, readAll, readOne, create, update, destroy, validate
 }

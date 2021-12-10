@@ -9,6 +9,7 @@ const router = express.Router({ mergeParams: true })
 router.get('/', usersController.readAll)
 router.post('/', usersController.validate('create'), usersController.create)
 
+router.post('/login', usersController.validate('create'), usersController.login)
 router.post('/register', usersController.validate('create'), usersController.create)
 
 router.get('/:id', usersController.readOne)
