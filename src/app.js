@@ -12,11 +12,12 @@ const app = express()
 // Middlewares
 app.use(express.json())
 app.use(cors())
-// app.use(expressValidator())
 
 // Routes
 app.use('/', routes)
 app.use('/api', apiRoutes)
-
+app.get('*', (req, res) => {
+    res.status(404).json({ message: 'Route not exits!' })
+})
 
 module.exports = { app }
