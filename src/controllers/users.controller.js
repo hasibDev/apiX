@@ -69,14 +69,11 @@ const create = async function (req, res) {
    const hashPassword = await bcrypt.hash(password, 10)
 
    try {
-      const user = await User.create({ firstName, lastName, email, password: hashPassword })
+      const user = await User.create({ firstName, lastName, email, password: hashPassword, authtype: 'users' })
       const jwtSecret = process.env.JWT_SECRET
 
       jwt.sign({ user }, jwtSecret, (err, token) => {
-         if (err) {
-            return res.status(500).json({ message: 'Error in JWT token generation' })
-         }
-
+         if (err) return res.status(500).json({ message: 'Error in JWT token generation' })
          return res.json({ data: user, token })
       })
 
