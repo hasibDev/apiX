@@ -13,13 +13,13 @@ module.exports = (sequelize, DataTypes) => {
          // define association here
       }
 
-      // toJSON() {
-      //   return {
-      //     ...this.get(),
-      //     password: undefined
-      //   }
+      toJSON() {
+         return {
+            ...this.get(),
+            password: undefined
+         }
 
-      // }
+      }
    };
    User.init({
       firstName: {
