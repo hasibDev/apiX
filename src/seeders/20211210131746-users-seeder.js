@@ -11,6 +11,7 @@ module.exports = {
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
       password,
+      authtype: 'users',
       createdAt: new Date(),
       updatedAt: new Date()
 

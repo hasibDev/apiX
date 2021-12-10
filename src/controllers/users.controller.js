@@ -69,7 +69,7 @@ const create = async function (req, res) {
    const hashPassword = await bcrypt.hash(password, 10)
 
    try {
-      const user = await User.create({ firstName, lastName, email, password: hashPassword, authtype: 'users' })
+      const user = await User.create({ firstName, lastName, email, password: hashPassword })
       const jwtSecret = process.env.JWT_SECRET
 
       jwt.sign({ user }, jwtSecret, (err, token) => {

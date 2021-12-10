@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       authtype: {
          type: DataTypes.STRING,
-         allowNull: false
+         defaultValue: 'users'
       }
    }, {
       sequelize,
