@@ -8,7 +8,7 @@ const router = express.Router({ mergeParams: true })
 /**
  * Alies to /users
  */
-router.get('/', auth('users'), usersController.readAll)
+router.get('/', usersController.readAll)
 router.post('/', usersController.validate('create'), usersController.create)
 
 router.post('/login', usersController.validate('create'), usersController.login)
