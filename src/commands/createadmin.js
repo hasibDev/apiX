@@ -1,5 +1,6 @@
 const { Admin } = require('../models')
 const readline = require('readline')
+const bcrypt = require("bcrypt")
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout })
 
@@ -12,6 +13,7 @@ const validateEmail = (email) => {
 rl.question('First Name: ', firstName => {
    rl.question('Last Name: ', lastName => {
       rl.question('Email: ', email => {
+         rl.stdoutMuted = true
          rl.question('Password: ', password => {
             rl.question('Confirm Password: ', async confirmedPassword => {
                if (password.length < 5) {
@@ -41,7 +43,9 @@ rl.question('First Name: ', firstName => {
                      return rl.close()
                   }
 
-                  await Admin.create({ firstName, lastName, email, password })
+                  const hashPassword = await bcrypt.hash(password, 10)
+
+                  await Admin.create({ firstName, lastName, email, password: hashPassword })
                   console.log("Admin Created Successfully!")
                } catch (error) {
                   console.error(error)
