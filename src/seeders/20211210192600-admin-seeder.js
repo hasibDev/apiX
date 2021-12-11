@@ -8,7 +8,7 @@ module.exports = {
       lastName: 'User',
       email: 'admin@example.com',
       password,
-      authtype: 'admins',
+      guard: 'admins',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {})

@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      authtype: {
+      guard: {
         type: Sequelize.STRING,
         allowNull: false
       },

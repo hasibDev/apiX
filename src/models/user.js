@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.STRING,
          allowNull: false
       },
-      authtype: {
+      guard: {
          type: DataTypes.STRING,
          defaultValue: 'users'
       }
