@@ -14,10 +14,10 @@ app.use(express.json())
 app.use(cors())
 
 // Routes
-app.use('/', routes)
 app.use('/api', apiRoutes)
-app.get('*', (req, res) => {
-    res.status(404).json({ message: 'Route not exits!' })
+app.use('/', routes)
+app.use('*', (req, res) => {
+    res.status(404).json({ status: 404, message: 'Route not exits!' })
 })
 
 module.exports = { app }

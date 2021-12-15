@@ -5,7 +5,7 @@ const auth = require('../../middlewares/auth')
 const router = express.Router({ mergeParams: true })
 
 /**
- * Alies to /categories
+ * @Route   /categories
  */
 router.get('/', auth(), categoriesController.readAll)
 router.post('/', auth(), categoriesController.validate('create'), categoriesController.create)
