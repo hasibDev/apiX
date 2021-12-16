@@ -21,9 +21,10 @@ const sendMail = async function ({ to, subject, text, html }) {
    const from = `"${process.env.MAIL_FROM_NAME} 👻" <${process.env.MAIL_FROM_ADDRESS}>`
    try {
       const info = await transporter.sendMail({ from, to, subject, text, html })
-      return Promise.resolve(info)
+      return info
    } catch (error) {
-      return Promise.reject({ error })
+      console.log(error)
+      return null
    }
 }
 

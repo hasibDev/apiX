@@ -76,9 +76,9 @@ const create = async function (req, res) {
       jwt.sign({ user }, jwtSecret, async (err, token) => {
          if (err) return res.status(500).json({ message: 'Error in JWT token generation' })
 
-         const url = `http://localhost:8000/api/users/verify/${token}`
          // Send Verification Mail
-         await sendMail({
+         const url = `http://localhost:8000/api/users/verify/${token}`
+         sendMail({
             to: email,
             subject: "Email Verification",
             text: "Verify Your Email Address.",

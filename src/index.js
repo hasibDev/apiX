@@ -10,7 +10,6 @@ const port = process.env.PORT || 5000
 const server = http.createServer(app)
 
 server.on('listening', async function () {
-
    try {
       await sequelize.authenticate()
       console.log(`Application running on http://${host}:${port}`)
