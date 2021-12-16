@@ -8,11 +8,13 @@ const router = express.Router({ mergeParams: true })
 /**
  * @Route    /users
  */
-router.get('/', auth('admins'), usersController.readAll)
-router.post('/', usersController.validate('create'), usersController.create)
 
 router.post('/login', usersController.validate('create'), usersController.login)
 router.post('/register', usersController.validate('create'), usersController.create)
+router.get('/verify/:token', usersController.verify)
+
+router.get('/', auth('admins'), usersController.readAll)
+router.post('/', usersController.validate('create'), usersController.create)
 
 router.get('/:id', auth('admins'), usersController.readOne)
 router.put('/:id', auth('admins', 'users'), usersController.validate('update'), usersController.update)

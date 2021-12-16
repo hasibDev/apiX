@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require("bcrypt")
 
+const { sendMail } = require('../services/mail.service')
 const { body, validationResult } = require('express-validator')
 const { User } = require('../models')
 
@@ -72,8 +73,22 @@ const create = async function (req, res) {
       const user = await User.create({ firstName, lastName, email, password: hashPassword })
       const jwtSecret = process.env.JWT_SECRET
 
-      jwt.sign({ user }, jwtSecret, (err, token) => {
+      jwt.sign({ user }, jwtSecret, async (err, token) => {
          if (err) return res.status(500).json({ message: 'Error in JWT token generation' })
+
+         const url = `http://localhost:8000/api/users/verify/${token}`
+         // Send Verification Mail
+         await sendMail({
+            to: email,
+            subject: "Email Verification",
+            text: "Verify Your Email Address.",
+            html: `
+               <p>Please <a href="${url}" target="_blank">verify</a> your email address</p>
+               <br />
+               <a href="${url}" target="_blank">Click Here</a>
+            `
+         })
+
          return res.json({ data: user, token })
       })
 
@@ -116,6 +131,32 @@ const destroy = async function (req, res) {
 
    await User.destroy({ where: { id } })
    return res.json({ message: 'Deleted Successfully', id })
+}
+
+/**
+ * Verify Email
+ */
+const verify = async function (req, res) {
+   const { token } = req.params
+
+   const jwtSecret = process.env.JWT_SECRET
+
+   jwt.verify(token, jwtSecret, async (err, { user }) => {
+      if (err) return res.status(401).json({ message: 'Invalid token!' })
+
+      try {
+         await User.update(
+            { verified: true },
+            { where: { id: user.id } }
+         )
+         return res.json({ message: 'Verified success!' })
+
+      } catch (error) {
+         return res.status(500).json({ error })
+      }
+
+   })
+
 }
 
 /**
@@ -162,5 +203,5 @@ const validate = function (method) {
 
 // Export to outside
 module.exports = {
-   login, readAll, readOne, create, update, destroy, validate
+   login, readAll, readOne, create, update, destroy, verify, validate
 }
