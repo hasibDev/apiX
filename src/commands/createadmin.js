@@ -13,7 +13,6 @@ const validateEmail = (email) => {
 rl.question('First Name: ', firstName => {
    rl.question('Last Name: ', lastName => {
       rl.question('Email: ', email => {
-         rl.stdoutMuted = true
          rl.question('Password: ', password => {
             rl.question('Confirm Password: ', async confirmedPassword => {
                if (password.length < 5) {
@@ -54,10 +53,6 @@ rl.question('First Name: ', firstName => {
                }
             })
          })
-      }
-
-      )
+      })
    })
-
-
 })

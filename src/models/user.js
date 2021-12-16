@@ -39,6 +39,10 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.STRING,
          allowNull: false
       },
+      verified: {
+         type: DataTypes.BOOLEAN,
+         defaultValue: false,
+      },
       guard: {
          type: DataTypes.STRING,
          defaultValue: 'users',

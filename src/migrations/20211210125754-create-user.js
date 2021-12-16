@@ -25,6 +25,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      verified: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       guard: {
         type: Sequelize.STRING,
         allowNull: false
