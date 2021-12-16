@@ -181,6 +181,13 @@ const verify = async function (req, res) {
 }
 
 /**
+ * Forget Password
+ */
+const forgetPassword = function (req, res) {
+   res.json({ message: 'Forget Password' })
+}
+
+/**
  * Request Validation
  */
 const validate = function (method) {
@@ -222,7 +229,8 @@ const validate = function (method) {
 }
 
 
+
 // Export to outside
 module.exports = {
-   login, readAll, readOne, create, update, destroy, verify, readMe, validate
+   login, readAll, readOne, create, update, destroy, verify, readMe, forgetPassword, validate
 }

@@ -11,7 +11,9 @@ const router = express.Router({ mergeParams: true })
 
 router.post('/login', usersController.validate('create'), usersController.login)
 router.post('/register', usersController.validate('create'), usersController.create)
+
 router.get('/verify/:token', usersController.verify)
+router.post('/forget-password', usersController.forgetPassword)
 router.get('/me', auth('users'), usersController.readMe)
 
 router.get('/', auth('admins'), usersController.readAll)
