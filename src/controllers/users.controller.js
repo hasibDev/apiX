@@ -10,6 +10,9 @@ const { User } = require('../models')
  */
 const login = async function (req, res) {
    const user = await User.findOne({ where: { email: req.body.email } })
+
+   if (!user) return res.status(400).json({ message: 'User Not found!' })
+
    const checkPassword = await bcrypt.compare(req.body.password, user.password)
    const jwtSecret = process.env.JWT_SECRET
 
