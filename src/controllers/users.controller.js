@@ -58,6 +58,27 @@ const readOne = async function (req, res) {
 }
 
 /**
+ * Read Me
+ */
+const readMe = async function (req, res) {
+   const authHeader = req.headers['authorization']
+   if (!authHeader) return res.status(401).json({ message: 'You are not authenticated!' })
+   let token = authHeader.includes('Bearer') ? authHeader.split(' ')[1] : authHeader
+   const jwtSecret = process.env.JWT_SECRET
+
+   jwt.verify(token, jwtSecret, async (err, value) => {
+      if (err) return res.status(401).json({ message: 'Invalid token!' })
+      try {
+         const user = await User.findByPk(value.user.id)
+         return res.json({ user })
+      } catch (error) {
+         res.status(500).json({ message: 'Something went wrong!' })
+      }
+   })
+
+}
+
+/**
  * Create New Data
  */
 const create = async function (req, res) {
@@ -203,5 +224,5 @@ const validate = function (method) {
 
 // Export to outside
 module.exports = {
-   login, readAll, readOne, create, update, destroy, verify, validate
+   login, readAll, readOne, create, update, destroy, verify, readMe, validate
 }
