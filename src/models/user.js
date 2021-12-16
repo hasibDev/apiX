@@ -18,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
             ...this.get(),
             password: undefined
          }
-
       }
    };
    User.init({
