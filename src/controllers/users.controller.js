@@ -33,10 +33,8 @@ const login = async function (req, res) {
  * Read All Data
  */
 const readAll = async function (req, res) {
-
    try {
       const data = await User.findAll()
-
       return res.json({ data })
    } catch (error) {
       return res.status(500).json({ message: 'Something went wrong!', error })
@@ -51,7 +49,6 @@ const readOne = async function (req, res) {
 
    try {
       const data = await User.findByPk(id)
-
       if (!data) return res.status(404).json({ message: `No data found for the id: ${id}` })
 
       return res.json({ data })
@@ -144,7 +141,6 @@ const update = async function (req, res) {
    } catch (error) {
       return res.status(500).json({ error })
    }
-
 }
 
 /**
@@ -153,8 +149,12 @@ const update = async function (req, res) {
 const destroy = async function (req, res) {
    const { id } = req.params
 
-   await User.destroy({ where: { id } })
-   return res.json({ message: 'Deleted Successfully', id })
+   try {
+      await User.destroy({ where: { id } })
+      return res.json({ message: 'Deleted Successfully', id })
+   } catch (error) {
+      return res.status(500).json({ error })
+   }
 }
 
 /**
