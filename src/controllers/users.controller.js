@@ -127,11 +127,11 @@ const update = async function (req, res) {
    }
 
    const { id } = req.params
-   const { firstName, lastName, email, password } = req.body
+   const { firstName, lastName, email } = req.body
 
    try {
       await User.update(
-         { firstName, lastName, email, password },
+         { firstName, lastName, email },
          { where: { id } }
       )
 
@@ -189,7 +189,7 @@ const validate = function (method) {
          return [
             body('firstName').notEmpty().isLength({ max: 50 }),
             body('lastName').notEmpty().isLength({ max: 50 }),
-            body('email').notEmpty().custom(async (email) => {
+            body('email').notEmpty().isEmail().custom(async (email) => {
                const user = await User.findOne({ where: { email } })
                if (user) {
                   throw new Error('E-mail already in use')
@@ -211,7 +211,7 @@ const validate = function (method) {
          return [
             body('firstName').notEmpty(),
             body('lastName').notEmpty(),
-            body('email').notEmpty(),
+            body('email').notEmpty().isEmail(),
          ]
          break
 
