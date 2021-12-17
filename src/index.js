@@ -1,6 +1,9 @@
+require('dotenv').config()
+
 const http = require('http')
 const { app } = require('./app')
 const { sequelize } = require('./models')
+
 
 // Application Configuration
 const host = process.env.HOST || 'localhost'

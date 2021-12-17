@@ -3,9 +3,6 @@ const cors = require('cors')
 const routes = require('./routes/index.route')
 const apiRoutes = require('./routes/api/index.route')
 
-// Import Enviroment Variables
-require('dotenv').config()
-
 // App Instance
 const app = express()
 
