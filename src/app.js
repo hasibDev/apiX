@@ -1,4 +1,5 @@
 const express = require('express')
+var morgan = require('morgan')
 const cors = require('cors')
 const routes = require('./routes/index.route')
 const apiRoutes = require('./routes/api/index.route')
@@ -6,9 +7,12 @@ const apiRoutes = require('./routes/api/index.route')
 // App Instance
 const app = express()
 
+
 // Middlewares
 app.use(express.json())
 app.use(cors())
+app.use(morgan('tiny'))
+
 
 // Routes
 app.use('/api', apiRoutes)
