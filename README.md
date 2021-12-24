@@ -1,2 +1,2 @@
 # apiX
-Express and Sequelize Project Starter.
+Express and Sequelize Project Starter!.
