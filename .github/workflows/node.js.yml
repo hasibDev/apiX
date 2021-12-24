@@ -26,10 +26,5 @@ jobs:
         cache: 'npm'
         
     - working-directory: /root/testing/apiX
-    - run: |
-          echo 'Commant running..'
-          whoami
-          git status
-          git pull
-          npm i
+    - run: echo 'Commant running..'
 
