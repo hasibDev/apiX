@@ -13,9 +13,9 @@ const port = process.env.PORT || 5000
 const server = http.createServer(app)
 
 server.on('listening', async function () {
+   console.log(`Application running on http://${host}:${port}`)
    try {
       await sequelize.authenticate()
-      console.log(`Application running on http://${host}:${port}`)
       console.log('Connection has been established successfully.')
    } catch (error) {
       console.error('Unable to connec to the Database:', error)
