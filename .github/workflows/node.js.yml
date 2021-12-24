@@ -24,7 +24,12 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: echo 'Script starts!'
-    - run: pwd
-    - run: npm i
+        
+    - working-directory: /root/testing/apiX
+    - run: |
+          echo 'Commant running..'
+          whoami
+          git status
+          git pull
+          npm i
 
