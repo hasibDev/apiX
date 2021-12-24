@@ -25,6 +25,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         
-    - working-directory: /root/testing/apiX
     - run: echo 'Commant running..'
+    - run: npm i
 
