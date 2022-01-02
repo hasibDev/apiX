@@ -1,9 +1,10 @@
 const { body, validationResult } = require('express-validator')
+const Model = require('model')
 
 /**
  * Get All Resources
  */
-const readAll = function (req, res) {
+const readAll = async function (req, res) {
    try {
       const data = await Model.findAll()
       return res.json({ data })
@@ -14,7 +15,7 @@ const readAll = function (req, res) {
 /**
  * Get Single Resources 
  */
-const readOne = function (req, res) {
+const readOne = async function (req, res) {
    const { id } = req.params
 
    try {
@@ -30,7 +31,7 @@ const readOne = function (req, res) {
 /**
  * Create Resources
  */
-const create = function (req, res) {
+const create = async function (req, res) {
    const errors = validationResult(req)
    if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
@@ -49,7 +50,7 @@ const create = function (req, res) {
 /**
  * Update Resources
  */
-const update = function (req, res) {
+const update = async function (req, res) {
    const errors = validationResult(req)
    if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() })
@@ -75,7 +76,7 @@ const update = function (req, res) {
 /**
  * Delete Resources
  */
-const destroy = function (req, res) {
+const destroy = async function (req, res) {
    const { id } = req.params
 
    try {
