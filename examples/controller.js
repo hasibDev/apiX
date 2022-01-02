@@ -1,5 +1,5 @@
 const { body, validationResult } = require('express-validator')
-const Model = require('model')
+const { Model } = require('../models')
 
 /**
  * Get All Resources
