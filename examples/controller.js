@@ -19,7 +19,7 @@ const readOne = async function (req, res) {
    const { id } = req.params
 
    try {
-      const data = await User.findByPk(id)
+      const data = await Model.findByPk(id)
       if (!data) return res.status(404).json({ message: `No data found for the id: ${id}` })
 
       return res.json({ data })
